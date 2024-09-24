@@ -7,7 +7,8 @@ This bot was made for an SCP: Secret Laboratory server, made by Lyxy
 
 I accept any reviews in the code about **optimization**, im not going to say im new on this, but im pretty bad at it lol
 
-You can find the bot in this server: [New Undergrounds SCP](https://discord.gg/wYsduG5xde)
+You can find the bot on this server: [New Undergrounds SCP](https://discord.gg/wYsduG5xde)
+
 
 # Other
 All the Commands:
@@ -24,4 +25,5 @@ All the Commands:
 - say
 - timeout
 
-This bot uses the npm [MegaDB](https://www.npmjs.com/package/megadb) as its main database manager, if you want to use another Database Manager, youll need to adapt the code to it.
+> [!NOTE]
+> This bot uses the npm [MegaDB](https://www.npmjs.com/package/megadb) as its main Database Manager, if you want to use another Database Manager, youll need to adapt the code to it.
