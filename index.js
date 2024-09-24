@@ -158,27 +158,13 @@ client.on("messageCreate", message => {
 	}
 })
 
-client.on("messageDelete", (message) => {
-    
-    return
-    
-    if (message.webhookId || message.author?.bot) return;
-    console.log(message.bot)
-    
-    const DeleteEmbed = new Discord.EmbedBuilder()
-    .setTitle("Mensaje Eliminado 🗑️")
-    .setColor("Red")
-    .setTimestamp()
-    .addFields({ name: 'Canal', value: '<#'+message.channel.id+'>', inline: true })
-    .setAuthor({ name: `${message.author.username}`, iconURL: message.author.avatarURL() })
-    .setDescription("```"+message.content+"```")
-    
-    client.channels.cache.get("1205014211894452314").send({ embeds: [DeleteEmbed] })
-    
-})
-
 client.on("ready", () => {
+	
+	// This is NOT an unused code
+	// This event is for sending the verification message, ill leave it there to prevent confussions.
+	
     return
+	
     const de = new Discord.EmbedBuilder()
     .setTitle("Verificacion ✅")
     .setDescription("Para acceder a las instalaciones. Primero verifica tu identidad cliqueando en el boton de abajo")
