@@ -22,8 +22,6 @@ module.exports = {
    */
 
   async run(client, interaction) {
-  
-  if(interaction.user.id !== "1144403268076830730") return interaction.reply({ content: "This command is currently under rework...", ephemeral: true })
    
   let usuario = interaction.options.getUser("usuario") 
   let miembro = interaction.options.getMember("usuario")
@@ -37,49 +35,51 @@ module.exports = {
   .setTimestamp()
   
   let especial;
+  let icon;
       
-        if (miembro.roles.cache.some(role => role.name === 'Usuario')) {
+        if (miembro.roles.cache.some(role => role.name === 'Usuario' || role.name === "veterano")) {
           especial = "Ningun rol Especial..."
-        }
-        if (miembro.roles.cache.some(role => role.name === 'Cadete')) {
-          especial = "Miembro de la Academia de Moderadores 🛡️"
-        }
-        if (miembro.roles.cache.some(role => role.name === 'Sub-Teniente')) {
-          especial = "Miembro de la Academia de Moderadores 🛡️"
-        }
-        if (miembro.roles.cache.some(role => role.name === 'Teniente')) {
-          especial = "Miembro de la Academia de Moderadores 🛡️"
-        }
-        if (miembro.roles.cache.some(role => role.name === 'Mayor')) {
-          especial = "Miembro de la Academia de Moderadores 🛡️"
-        }
-        if (miembro.roles.cache.some(role => role.name === 'Coronel')) {
-          especial = "Miembro de la Academia de Moderadores 🛡️"
-        }
-        if (miembro.roles.cache.some(role => role.name === 'General')) {
-          especial = "Miembro de la Academia de Moderadores 🛡️"
+          icon = "👤"
         }
         if (miembro.roles.cache.some(role => role.name === 'Streamer')) {
           especial = "Creador de Contenido 🟣"
+          icon = "🟣"
         }
         if (miembro.roles.cache.some(role => role.name === 'Youtuber')) {
           especial = "Creador de Contenido 🔴"
+          icon = "🔴"
         }
         if (miembro.roles.cache.some(role => role.name === 'DONADOR UwU')) {
           especial = "Donador 💸"
+          icon = "💸"
         }
         if (miembro.roles.cache.some(role => role.name === 'Artista')) {
           especial = "Artista 🎨"
+          icon = "🎨"
         }
         if (miembro.roles.cache.some(role => role.name === 'Presidente de las instalaciones')) {
           especial = "Nivel 50 🏆"
+          icon = "🏆"
         }
+        if (miembro.roles.cache.some(role => role.name === 'KÜRT VIP' || role.name ===  "Underground ViP" || role.name === "Usground vip" || role.name === "Oberkommando VIP" || role.name === "OBERKOMMANDO +" || role.name === "OBERKOMMANDO ++")) {
+          especial = "V.I.P 💎"
+          icon = "💎"
+        }
+        if (miembro.roles.cache.some(role => role.name === 'Cadete' || role.name === 'Sub-Teniente' || role.name === 'Teniente' || role.name === 'Mayor' || role.name === 'Coronel' || role.name === 'General')) {
+          especial = "Miembro de la Academia de Moderadores 🛡️"
+          icon = "🛡️"
+            }
+        if (miembro.roles.cache.some(role => role.name === 'Owner.')) {
+          especial = "Owner 👑"
+          icon = "👑"
+        }
+      
       let booster;
       
       if(miembro.premiumSince === null){
           booster = "`No`"
       } else {
-          booster = `<t:${Math.round(usuario.premiumSinceTimestamp / 1000)}:R>`
+          booster = `<t:${Math.round(miembro.premiumSinceTimestamp / 1000)}:R>`
       }
       
       let w;
@@ -89,8 +89,8 @@ module.exports = {
           w = "`No tiene Advertencias`"
       }
   const AvatarEmbed = new Discord.EmbedBuilder()
-  .setTitle("Perfil de "+usuario.displayName)
-  .setDescription(`🎂 Creado: **<t:${Math.round(usuario.createdTimestamp / 1000)}:R>**\n 🛬 Se unio: **<t:${Math.round(miembro.joinedTimestamp / 1000)}:R>**\n⭐ Especial: **\`${especial}\`**\n💎 Booster: **${booster}**\n🪪 ID: **\`${usuario.id}\`**\n👤 Rol mas Alto: <@&${miembro.roles.highest.id}>\n⚠️ Warns: **${w}**`)
+  .setTitle("Perfil de "+usuario.displayName+` ${icon}`)
+  .setDescription(`\n🔴 Mencion: <@${usuario.id}>\n🎂 Creado: **<t:${Math.round(usuario.createdTimestamp / 1000)}:R>**\n 🛬 Se unio: **<t:${Math.round(miembro.joinedTimestamp / 1000)}:R>**\n⭐ Especial: **\`${especial}\`**\n💎 Booster: **${booster}**\n🪪 ID: **\`${usuario.id}\`**\n👤 Rol mas Alto: <@&${miembro.roles.highest.id}>\n⚠️ Warns: **${w}**`)
   .setColor(miembro.displayHexColor)
   .setThumbnail(usuario.displayAvatarURL())
   .setFooter({ text: "NEW UNDERGROUNDS" })
