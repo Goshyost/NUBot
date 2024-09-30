@@ -3,6 +3,7 @@ const { PermissionFlagsBits } = require("discord.js")
 const Discord = require("discord.js")
 const db = require("megadb")
 const warns = new db.crearDB("warns")
+const pf = new db.crearDB("profile_notes")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -73,9 +74,10 @@ module.exports = {
           especial = "Owner 👑"
           icon = "👑"
         }
+      if(especial === undefined) especial = "Ningun rol Especial..."
+      if(icon === undefined) icon = "👤"
       
       let booster;
-      
       if(miembro.premiumSince === null){
           booster = "`No`"
       } else {
@@ -88,13 +90,23 @@ module.exports = {
       } else {
           w = "`No tiene Advertencias`"
       }
+      
+      let nota;
+      if(pf.tiene(usuario.id) === true){
+          nota = `\`${await pf.obtener(usuario.id)}\``
+      } else {
+          nota = "`No tiene ninguna nota.`"
+      }
   const AvatarEmbed = new Discord.EmbedBuilder()
   .setTitle("Perfil de "+usuario.displayName+` ${icon}`)
-  .setDescription(`\n🔴 Mencion: <@${usuario.id}>\n🎂 Creado: **<t:${Math.round(usuario.createdTimestamp / 1000)}:R>**\n 🛬 Se unio: **<t:${Math.round(miembro.joinedTimestamp / 1000)}:R>**\n⭐ Especial: **\`${especial}\`**\n💎 Booster: **${booster}**\n🪪 ID: **\`${usuario.id}\`**\n👤 Rol mas Alto: <@&${miembro.roles.highest.id}>\n⚠️ Warns: **${w}**`)
+  .setDescription(`\n🔴 Mencion: <@${usuario.id}>\n🎂 Creado: **<t:${Math.round(usuario.createdTimestamp / 1000)}:R>**\n 🛬 Se unio: **<t:${Math.round(miembro.joinedTimestamp / 1000)}:R>**\n⭐ Especial: **\`${especial}\`**\n💎 Booster: **${booster}**\n🪪 ID: **\`${usuario.id}\`**\n👤 Rol mas Alto: <@&${miembro.roles.highest.id}>\n⚠️ Warns: **${w}**\n📃 Nota: **${nota}**`)
   .setColor(miembro.displayHexColor)
   .setThumbnail(usuario.displayAvatarURL())
   .setFooter({ text: "NEW UNDERGROUNDS" })
   .setTimestamp()
+  if(miembro.isCommunicationDisabled() === true){
+      AvatarEmbed.addFields({ name: "Usuario Silenciado 🔇", value: `Este usuario ha recibido un Timeout, el usuario podra volver a comunicarse en:<t:${Math.round(miembro.communicationDisabledUntilTimestamp  / 1000)}:R>` })
+  }
   
   
   let oculto = interaction.options.getBoolean("oculto") ?? false
