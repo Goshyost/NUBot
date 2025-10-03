@@ -27,3 +27,6 @@ All the Commands:
 
 > [!NOTE]
 > This bot uses the npm [MegaDB](https://www.npmjs.com/package/megadb) as its main Database Manager, if you want to use another Database Manager, youll need to adapt the code to it.
+
+> [!CAUTION]
+> This code was made along time ago, and its currently abandoned, I dont have knowledge about this code working in newer versions of Discord.JS, please be aware of this.
